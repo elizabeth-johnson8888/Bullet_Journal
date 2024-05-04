@@ -1,0 +1,63 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+a, label, p, li, textarea, button {
+    font-family: serif;
+}
+
+#themes-card, #notes-index {
+    background-color: var(--wt-clr);
+}
+
+body, #login-portal, .login-portal-button,
+    .modal-body, #event-inputs, .modal-footer, .cal,
+    .cal li, .calendar-control, #calendar-dropdown,
+    .notepad-control {
+    background-color: var(--lt-clr);
+}
+
+.generic-button, .calendar, .cal {
+    border-color: var(--md-drk-clr);
+}
+
+
+#calendar-dropdown li a:hover, main, .reading, .modal-header, .modal-button,
+    .cal h6, #themes-card .card-body, #notes-list-container li {
+    background-color: var(--md-clr);
+}
+
+input, textarea {
+    border-color:var(--md-drk-clr);
+    background-color: var(--wt-clr);
+}
+
+#title, .modal-header h2, .modal-button, #hamburger,
+    .navbar-brand, .modal-close, .calendar-title, .navbar-nav strong,
+    #theme-header, #theme-submit, #notes-index-header h3,
+    #notes-index-header strong, #notes-list-container strong,
+    #notes-list-container i, #nav-icon i, .nav-item a {
+    color: var(--wt-clr);
+}
+
+.modal-header, .modal-footer {
+    border-color: var(--drk-clr);
+}
+
+.title, .navbar, .calendar-header, .calendar-footer, .navbar-collapse,
+    #theme-header, #theme-submit, #notepad-holder, #notes-index-header {
+    background-color: var(--md-drk-clr);
+}
+
+h3, h2, p, #further-reading, .calendar-control strong,
+    .notepad-control, .login-portal-button a {
+    color: var(--drk-clr);
+}
+
+.navbar-collapse {
+    border-color: var(--wt-clr);
+}
+
+#notes-main {
+    background-color: transparent;
+}

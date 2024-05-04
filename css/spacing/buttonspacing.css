@@ -1,0 +1,27 @@
+.generic-button {
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.no-border-button {
+    padding: 4px;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.generic-button a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.generic-button strong {
+    text-decoration: none;
+    background-color: transparent;
+}

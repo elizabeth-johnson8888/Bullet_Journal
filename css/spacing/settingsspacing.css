@@ -1,0 +1,22 @@
+main {
+    margin: 2em;
+}
+
+h1 {
+    text-align: center;
+    padding: 1vh 1vw;
+    text-decoration: underline;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 1em;
+    padding:2em;
+    padding-bottom: 1em;
+}
+
+#initials {
+    border-radius: 5px;
+}
+

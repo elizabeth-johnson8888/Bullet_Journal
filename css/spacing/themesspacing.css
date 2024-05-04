@@ -1,0 +1,35 @@
+.card {
+    padding:0;
+    margin:0;
+}
+.main {
+    margin:5vh 5vw;
+    padding:0;
+}
+
+.grid {
+    padding:0;
+    margin: 1em;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    height: 10em;
+}
+
+.col, button {
+    margin:1em;
+}
+
+a {
+    text-decoration: none;
+}
