@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Elizabeth Johnson">
+        <meta name="description" content="Calendar page">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/6e967c5757.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="css/spacing/headerspacing.css" rel="stylesheet">
+        <link href="css/spacing/calendarspacing.css" rel="stylesheet">
+        <link href="css/spacing/buttonspacing.css" rel="stylesheet">
+        <link id="page-theme" class="page-theme" href="css/themes/defaultTheme.css" rel="stylesheet">
+        <link href="css/themes/fixedStyle.css" rel="stylesheet">
+        <script src="script/calendarSizeControls.js"></script>
+        <link rel="icon" href="images/favicon.jpg" type="image/x-icon">
+        <link rel="shortcut icon" href="images/favicon.jpg" type="image/x-icon">
+
+        <title>Calendar</title>
+    </head>
+
+    <header class="navbar">
+        <div class="container-fluid">
+            <button id="nav-icon" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-expanded="false" aria-controls="nav" aria-label="Toggle navigation">
+                <i id="hamburger" class="fa-solid fa-bars fa-lg"></i>
+            </button>
+            <nav class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="calendar.html"><strong>Calendar</strong></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="notes.html"><strong>Notes</strong></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html"><strong>Settings</strong></a>
+                    </li>
+                </ul>
+            </nav>
+            <h1 id="initials-nav" class="navbar-brand">DK</h1>
+        </div>
+    </header>
+
+    <body>
+        <div class="header">
+            <img id="left-image">
+            <h1>Calendar</h1>
+            <img id="right-image">
+        </div>
+
+        <div class="container card calendar">
+            <div class="card-header calendar-header">
+                <!-- Says the Month, Week Dates, or Day date -->
+                <h2 id="monthly-title" class="calendar-title">month</h2>
+                <!-- <h2 id="weekly-title" class="calendar-title">week</h2>
+                <h2 id="daily-title" class="calendar-title">day</h2> -->
+
+
+                <div id="calendar-controls">
+                    <!-- goes back one entry -->
+                    <button id="previousBtn" type="button" class="generic-button calendar-control"><strong>&lt</strong></button>
+                    <!-- goes forward one entry -->
+                    <button id="nextBtn" type="button" class="generic-button calendar-control"><strong>&gt</strong></button>
+                    <!-- Changes monthly/weekly/daily -->
+                    <div class="dropdown">
+                        <button id="calendar-drop-month" class="generic-button btn dropdown-toggle calendar-control" type="button" data-bs-toggle="dropdown" aria-expanded="false">Monthly</button>
+                        <ul id="calendar-dropdown" class="dropdown-menu">
+                            <li><a id="mly" class="dropdown-item" href="#"><strong>Monthly</strong></a></li>
+                            <li><a id="wly" class="dropdown-item" href="#"><strong>Weekly</strong></a></li>
+                            <li><a id="dly" class="dropdown-item" href="#"><strong>Daily</strong></a></li>
+                        </ul>
+                    </div>
+                    <!-- event button that triggers the modal-->
+                    <button class="btn  generic-button calendar-control" type="button" data-bs-toggle="modal" data-bs-target="#menu-modal"><strong>+</strong></button>
+
+                    <div class="modal fade" id="menu-modal" tabindex="-1" aria-labelledby="menu-modal-label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Add Event</h2>
+                                </div>
+                                <form id="event-inputs">
+                                    <!-- class="modal-body row d-flex justify-content-around" -->
+                                    <input id="event-name" type="text" name="event" placeholder="Event">
+                                    <div style="display: flex;">
+                                        <input id="event-date" type="date" name="date">
+                                        <i id="event-date-invalid" class="fa-solid fa-star-of-life fa-xs invalid-input cal-no-display"></i>
+                                    </div>
+
+                                    <label id="event-start-label" for="start-time"><strong>Start-time:</strong></label>
+                                    <div id="start-time-container">
+                                        <input id="start-time" type="time" name="time">
+                                        <i id="start-time-invalid" class="fa-solid fa-star-of-life fa-xs invalid-input cal-no-display"></i>
+                                    </div>
+
+
+                                    <label id="event-end-label" for="end-time"><strong>End-time:</strong></label>
+                                    <div id="end-time-container">
+                                        <input id="end-time" type="time" name="time">
+                                        <i id="end-time-invalid" class="fa-solid fa-star-of-life fa-xs invalid-input cal-no-display"></i>
+                                    </div>
+                                    <textarea id="event-notes" placeholder="Notes"></textarea>
+                                </form>
+                                <div class="modal-footer">
+                                    <button id="save-event" type="button" class="btn generic-button modal-button"><strong>Save Event</strong></button>
+                                    <button id="save-review-event" type="button" class="btn generic-button modal-button cal-no-display"><strong>Save Event</strong></button>
+                                    <button id="close-event" type="button" class="btn generic-button modal-button " data-bs-dismiss="modal" aria-label="Close"><strong>Close</strong></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REVIEW EVENT MODAL, LETS YOU SEE THE EVENT INFORMATION AND HAS OPTION TO CHANGE IT -->
+            <div class="modal fade" id="review-event" tabindex="-1" aria-labelledby="event-name" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="review-event-name" >Event-name</h1>
+                        </div>
+                        <div class="modal-body hide-element">
+                            <div id="date-no-edit">date</div>
+                            <div id="start-no-edit">start time</div>
+                            <div id="end-time-no-edit" class="">end time</div>
+                            <div id="notes-no-edit" class="">event notes</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="close-review" type="button" class="btn generic-button" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            <button id="edit-event" type="button" class="btn generic-button">Edit Event</button>
+                            <button id="delete-event" type="button" class="btn generic-button">Delete Event</button>
+                            <!-- <button id="save-revised-event" type="button" class="btn generic-button" style="display: none;">Save Event</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  monthly calendar- a grid filled with cards -->
+            <div id="month" class="grid monthly container">
+                <div class="row">
+                    <div class="col card cal container">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+                </div>
+            </div>
+            <!--  weekly calendar- a grid filled with cards -->
+            <div id="week" class="grid weekly container">
+                <div class="row">
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+
+                    <div class="col card cal">
+                        <h6 class="card-title"></h6>
+                        <ul class="list-group list-group-flush"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily calendar -->
+            <div id="day" class="daily">
+                <div id="daily-list" class="col card container cal">
+                    <ul class="list-group list-group-flush"></ul>
+                </div>
+            </div>
+
+            <div class="card-body themes calendar-footer">
+                <button id="theme-button" class="generic-button calendar-control"><a href="themes.html"><strong>Themes</strong></a></button>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>
