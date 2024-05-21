@@ -664,7 +664,7 @@ function addeventlisteners() {
                 let theme = cursor.value.theme
                 if (cursor.key == dateid) { // theme is found
                     // load json file
-                    const url='https://w3stu.cs.jmu.edu/johns5el/cs343/Project/json/themes.json'
+                    const url='https://elizabeth-johnson8888.github.io/Bullet_Journal/json/themes.json'
 
                     fetch(url).then((response) => response.text())
                         .then((text) => {
