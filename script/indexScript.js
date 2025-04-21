@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('login').addEventListener('click', function () {
     let accStr = localStorage.getItem('accounts');
     let accs = JSON.parse(accStr);
-    console.log(accs);
+    console.log(accStr);
     let username = document.getElementById('uname');
     let password = document.getElementById('pass');
     let isFound = accs.find((info) => info.user === username.value && info.pass === password.value);
@@ -90,7 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
      else { // if accountstr is null
-      newAccountStr = JSON.stringify(newAccount);
+      let accountFix = [newAccount];
+      newAccountStr = JSON.stringify(accountFix);
+      // newAccountStr = JSON.stringify(newAccount);
       console.log(newAccountStr);
       localStorage.setItem("accounts", newAccountStr);
 
